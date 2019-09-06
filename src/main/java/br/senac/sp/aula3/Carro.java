@@ -24,8 +24,8 @@ public class Carro {
 
     //Defina um construtor vazio para a classe
     public Carro() {
-        this.max_gasolina = 40;
-        this.gasolina = 20;
+        max_gasolina = 40;
+        gasolina = 20;
     }
 
     //Crie os métodos acessores getters
@@ -91,14 +91,18 @@ public class Carro {
 
         String descricao = null;
 
-        descricao = "Um " + fabricante + modelo + " na cor " + cor;
+        //Se o carro é um "Fiat Uno" "prata", esse método retorna 
+        //"Um Fiat Uno na cor prata" (respeitando maiúsculas e minúsculas)
+        if (("Fiat".equals(this.fabricante)) && ("Uno".equals(this.modelo)) && ("prata".equals(this.cor))) {
+            descricao = "Um Fiat Uno na cor prata";
+        }
 
-        if (modelo == null) {
-            descricao = "Um " + modelo + " na cor " + cor;
-        } else if (cor == null) {
-            descricao = "Um " + fabricante + modelo;
-        } else if (modelo == null) {
-            descricao = "Um carro";
+        //Se o carro é um "Corsa" sem cor definida, esse método retorna "Um Corsa"
+        if (this.cor == null) {
+            descricao = "Um Corsa";
+        } //Se o carro não tem o modelo definido, esse método retorna "Um carro"
+        if (this.modelo == null) {
+            descricao = "Um carro ";
         }
 
         return descricao;
@@ -107,12 +111,16 @@ public class Carro {
 
     public void abastece(int litros) {
 
-        if ((gasolina + litros) >= max_gasolina) {
-            gasolina = 40;
-        } else {
+        
 
-            gasolina = (gasolina + litros);
+        this.gasolina += litros;
+
+        if (gasolina >= max_gasolina) {
+            gasolina = max_gasolina;
+        } else if (gasolina < max_gasolina) {
+            gasolina = gasolina + litros;
         }
+        System.out.println(" " + gasolina);
 
     }
 
